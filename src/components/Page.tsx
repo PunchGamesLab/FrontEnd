@@ -10,16 +10,52 @@ import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
-import MenuItem from '@mui/material/MenuItem'
+import ListItem from '@mui/material/ListItem'
 import Drawer from '@mui/material/Drawer'
-import { Paper } from '@mui/material'
+import { List, Paper } from '@mui/material'
 // import Container from '@mui/material/Container'
-import { navigation } from 'config'
+import { navigation, Links } from 'config'
 import useIntersectionObserver from 'helpers'
+import ImageContainer from './ImageContainer'
+import { PunchLogo, PaymentProviders, DiscordIcon, TelegramIcon, TwitterIcon } from 'assets'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
+import Slide from '@mui/material/Slide'
 
 interface Props {
   children: React.ReactNode
 }
+interface HideOnScrollProps {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window
+  children: React.ReactElement
+}
+
+function HideOnScroll(props: HideOnScrollProps) {
+  const { children, window } = props
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  })
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  )
+}
+
+const IconButtonStyles = {
+  background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
+  border: '5px solid #E3EDFF',
+  borderRadius: '500px',
+  width: '60px',
+  aspectRatio: '1',
+} as const
 
 const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
   const [state, setState] = React.useState({
@@ -39,65 +75,148 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
   const [currentSection, setCurrentSection] = useState<string>('#home')
   const pathname = window.location.pathname
   const isActive = (path: string): boolean => pathname.includes(path) || currentSection === path
+
   const ref = useRef<HTMLDivElement | null>(null)
   const entry = useIntersectionObserver(ref, {})
   const isVisible = !!entry?.isIntersecting
 
+  const scrollTo = (id: string) => {
+    const section = document.querySelector(id)
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <Paper sx={{ minHeight: '100vh' }}>
-      <AppBar position="static" sx={{ background: '#FFFFFF', height: '97px' }}>
-        <Container maxWidth="xl">
-          
-          <Toolbar disableGutters>
-            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-              LOGO
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {navigation.map((page) => (
-                <Button
-                  key={page.name}
-                  onClick={null}
-                  variant="text"
-                  color={isActive(page.id) ? 'primary' : 'secondary'}
-                  href={page.id}
-                  sx={{ my: 2, display: 'block' }}
-                >
-                  {page.name}
-                </Button>
-              ))}
+      <HideOnScroll {...props}>
+        <AppBar sx={{ background: '#FFFFFF', height: '68px' }} elevation={0}>
+          <Container maxWidth="xl">
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+              <IconButton color="primary">
+                <MenuIcon onClick={toggleDrawer('left', true)} />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
+                Punch
+              </Typography>
             </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={null} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-            </Box>
-          </Toolbar>
-          <Drawer variant="temporary" anchor="left" open={state.left} onClose={toggleDrawer('left', false)}></Drawer>
-        </Container>
-      </AppBar>
+            <Toolbar disableGutters>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, color: 'black', display: { xs: 'none', md: 'flex' } }}
+              >
+                Punch
+              </Typography>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                {navigation.map((page) => (
+                  <Button
+                    key={page.name}
+                    onClick={scrollTo.bind(null, page.id)}
+                    variant="text"
+                    sx={{
+                      my: 2,
+                      display: 'block',
+                      color: isActive(page.id) ? 'text.sceondary' : 'text.primary',
+                      fontFamily: 'Rubik',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {page.name}
+                  </Button>
+                ))}
+              </Box>
+            </Toolbar>
+            <Drawer variant="temporary" anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
+              <Box>
+                <List>
+                  {navigation.map((page) => (
+                    <ListItem
+                      button
+                      key={page.name}
+                      onClick={() => {
+                        toggleDrawer('left', false)
+                        scrollTo.bind(null, page.id)
+                      }}
+                      selected={isActive(page.id)}
+                    >
+                      {page.name}
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Drawer>
+          </Container>
+        </AppBar>
+      </HideOnScroll>
       {children}
-      <Container>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#2672FA' }}>
-          <Box>copyright</Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+      <Box
+        sx={{
+          background: '#2672FA',
+          p: { xs: '30px', md: '30px 130px' },
+          '*': {
+            fontFamily: 'Rubik',
+          },
+        }}
+      >
+        <ImageContainer url={PunchLogo} sx={{ width: '51px' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              maxWidth: { md: '390px' },
+            }}
+          >
+            <Typography color="white">
+              Punch Games is a Blockchain-powered Web 3.0 Esports Play-to-earn Gaming Metaverse
+            </Typography>
+            <ImageContainer
+              url={PaymentProviders}
+              sx={{
+                maxWidth: { xs: '100%', md: '270px' },
+              }}
+            />
+          </Box>
+          <Box sx={{ flexGrow: 1, display: 'flex', flexWrap: 'wrap' }}>
             {navigation.map((page) => (
               <Button
                 key={page.name}
-                onClick={null}
+                onClick={scrollTo.bind(null, page.id)}
                 variant="text"
-                href={page.id}
-                sx={{ my: 2, display: 'block', color: 'white' }}
+                sx={{ my: 2, display: 'block', color: 'white', fontFamily: 'Rubik', fontWeight: 'bold' }}
               >
                 {page.name}
               </Button>
             ))}
           </Box>
-          <Box>socials</Box>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px',
+            }}
+          >
+            <IconButton href={Links.socials.discord} sx={IconButtonStyles}>
+              <DiscordIcon width="34px" />
+            </IconButton>
+            <IconButton href={Links.socials.twitter} sx={IconButtonStyles}>
+              <TwitterIcon width="34px" />
+            </IconButton>
+            <IconButton href={Links.socials.telegram} sx={IconButtonStyles}>
+              <TelegramIcon width="34px" />
+            </IconButton>
+          </Box>
         </Box>
-      </Container>
+        <Box>
+          <Typography fontFamily="Rubik" textAlign="center" color="white" fontSize={{ xs: '12px', md: '16px' }}>
+            ©2021 DREPUBLIC, INC. ALL RIGHTS RESERVED.
+          </Typography>
+        </Box>
+      </Box>
     </Paper>
   )
 }
