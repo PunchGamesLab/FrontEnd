@@ -1,0 +1,5 @@
+@font-face {
+  font-family: 'Kartooni';
+  src: url('./Kartooni.ttf') format('truetype');
+  font-display: swap;
+}
