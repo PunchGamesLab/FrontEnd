@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react'
+import { RefObject, useEffect, useState, createContext, useContext } from 'react'
 
 interface Args extends IntersectionObserverInit {
   freezeOnceVisible?: boolean
@@ -41,3 +41,23 @@ function useIntersectionObserver(
 }
 
 export default useIntersectionObserver
+interface InViewProps {
+  views: {
+    home: boolean,
+    about: boolean,
+    partners: boolean,
+    investors: boolean,
+    contact: boolean,
+  };
+  handleChangeViews: (view: {
+    home: boolean,
+    about: boolean,
+    partners: boolean,
+    investors: boolean,
+    contact: boolean,
+  }) => void;
+
+}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const InViewContext = createContext<InViewProps>({ views: { home: false, about: false, partners: false, investors: false, contact: false }, handleChangeViews: () => { } })
+export const useInViewContext = () => useContext(InViewContext);

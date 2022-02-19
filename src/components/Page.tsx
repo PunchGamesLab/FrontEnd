@@ -12,10 +12,10 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import ListItem from '@mui/material/ListItem'
 import Drawer from '@mui/material/Drawer'
-import { List, Paper } from '@mui/material'
+import { List, ListItemButton, Paper } from '@mui/material'
 // import Container from '@mui/material/Container'
 import { navigation, Links } from 'config'
-import useIntersectionObserver from 'helpers'
+import useIntersectionObserver, { InViewContext } from 'helpers'
 import ImageContainer from './ImageContainer'
 import { PunchLogo, PaymentProviders, DiscordIcon, TelegramIcon, TwitterIcon } from 'assets'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
@@ -72,9 +72,15 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
 
     setState({ ...state, [anchor]: open })
   }
-  const [currentSection, setCurrentSection] = useState<string>('#home')
+  const [currentSection, setCurrentSection] = useState({
+    home: true,
+    about: false,
+    partners: false,
+    investors: false,
+    contact: false,
+  })
   const pathname = window.location.pathname
-  const isActive = (path: string): boolean => pathname.includes(path) || currentSection === path
+  const isActive = (path: string): boolean => pathname.includes(path) || currentSection[path.replace('#', '')]
 
   const ref = useRef<HTMLDivElement | null>(null)
   const entry = useIntersectionObserver(ref, {})
@@ -87,136 +93,147 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
 
   return (
     <Paper sx={{ minHeight: '100vh' }}>
-      <HideOnScroll {...props}>
-        <AppBar sx={{ background: '#FFFFFF', height: '68px' }} elevation={0}>
-          <Container maxWidth="xl">
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
-              <IconButton color="primary">
-                <MenuIcon onClick={toggleDrawer('left', true)} />
-              </IconButton>
-              <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
-                Punch
-              </Typography>
-            </Box>
-            <Toolbar disableGutters>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, color: 'black', display: { xs: 'none', md: 'flex' } }}
-              >
-                Punch
-              </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {navigation.map((page) => (
-                  <Button
-                    key={page.name}
-                    onClick={scrollTo.bind(null, page.id)}
-                    variant="text"
-                    sx={{
-                      my: 2,
-                      display: 'block',
-                      color: isActive(page.id) ? 'text.sceondary' : 'text.primary',
-                      fontFamily: 'Rubik',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {page.name}
-                  </Button>
-                ))}
+      <InViewContext.Provider value={{ views: currentSection, handleChangeViews: setCurrentSection }}>
+        <HideOnScroll {...props}>
+          <AppBar sx={{ background: '#FFFFFF', height: '68px' }} elevation={0}>
+            <Container maxWidth="xl">
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+                <IconButton color="primary">
+                  <MenuIcon onClick={toggleDrawer('left', true)} />
+                </IconButton>
+                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
+                  Punch
+                </Typography>
               </Box>
-            </Toolbar>
-            <Drawer variant="temporary" anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
-              <Box>
-                <List>
+              <Toolbar disableGutters>
+                <Box
+                  sx={{
+                    flexGrow: 1,
+                    display: { xs: 'none', md: 'flex' },
+                    alignItems: 'center',
+                    gap: '10px',
+                  }}
+                >
+                  <ImageContainer url={PunchLogo} sx={{ width: '45px' }} />
+                  <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
+                    Punch
+                  </Typography>
+                </Box>
+                {/*  <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{ flexGrow: 1, color: 'black', display: { xs: 'none', md: 'flex' } }}
+                >
+                  Punch
+                </Typography> */}
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                   {navigation.map((page) => (
-                    <ListItem
-                      button
+                    <Button
                       key={page.name}
-                      onClick={() => {
-                        toggleDrawer('left', false)
-                        scrollTo.bind(null, page.id)
+                      onClick={scrollTo.bind(null, page.id)}
+                      variant="text"
+                      sx={{
+                        my: 2,
+                        display: 'block',
+                        color: isActive(page.id) ? 'text.sceondary' : 'text.primary',
+                        fontFamily: 'Rubik',
+                        fontWeight: 'bold',
                       }}
-                      selected={isActive(page.id)}
                     >
                       {page.name}
-                    </ListItem>
+                    </Button>
                   ))}
-                </List>
-              </Box>
-            </Drawer>
-          </Container>
-        </AppBar>
-      </HideOnScroll>
-      {children}
-      <Box
-        sx={{
-          background: '#2672FA',
-          p: { xs: '30px', md: '30px 130px' },
-          '*': {
-            fontFamily: 'Rubik',
-          },
-        }}
-      >
-        <ImageContainer url={PunchLogo} sx={{ width: '51px' }} />
+                </Box>
+              </Toolbar>
+              <Drawer variant="temporary" anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
+                <Box>
+                  <List>
+                    {navigation.map((page) => (
+                      <ListItemButton
+                        key={page.name}
+                        onClick={scrollTo.bind(null, page.id) && toggleDrawer('left', false)}
+                        selected={isActive(page.id)}
+                      >
+                        {page.name}
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Box>
+              </Drawer>
+            </Container>
+          </AppBar>
+        </HideOnScroll>
+        {children}
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            background: '#2672FA',
+            p: { xs: '30px', md: '30px 130px' },
+            '*': {
+              fontFamily: 'Rubik',
+            },
           }}
         >
-          <Box
-            sx={{
-              maxWidth: { md: '390px' },
-            }}
-          >
-            <Typography color="white">
-              Punch Games is a Blockchain-powered Web 3.0 Esports Play-to-earn Gaming Metaverse
-            </Typography>
-            <ImageContainer
-              url={PaymentProviders}
-              sx={{
-                maxWidth: { xs: '100%', md: '270px' },
-              }}
-            />
-          </Box>
-          <Box sx={{ flexGrow: 1, display: 'flex', flexWrap: 'wrap' }}>
-            {navigation.map((page) => (
-              <Button
-                key={page.name}
-                onClick={scrollTo.bind(null, page.id)}
-                variant="text"
-                sx={{ my: 2, display: 'block', color: 'white', fontFamily: 'Rubik', fontWeight: 'bold' }}
-              >
-                {page.name}
-              </Button>
-            ))}
-          </Box>
+          <ImageContainer url={PunchLogo} sx={{ width: '51px' }} />
           <Box
             sx={{
               display: 'flex',
-              gap: '20px',
+              flexDirection: { xs: 'column', md: 'row' },
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            <IconButton href={Links.socials.discord} sx={IconButtonStyles}>
-              <DiscordIcon width="34px" />
-            </IconButton>
-            <IconButton href={Links.socials.twitter} sx={IconButtonStyles}>
-              <TwitterIcon width="34px" />
-            </IconButton>
-            <IconButton href={Links.socials.telegram} sx={IconButtonStyles}>
-              <TelegramIcon width="34px" />
-            </IconButton>
+            <Box
+              sx={{
+                maxWidth: { md: '390px' },
+              }}
+            >
+              <Typography color="white">
+                Punch Games is a Blockchain-powered Web 3.0 Esports Play-to-earn Gaming Metaverse
+              </Typography>
+              <ImageContainer
+                url={PaymentProviders}
+                sx={{
+                  maxWidth: { xs: '100%', md: '270px' },
+                }}
+              />
+            </Box>
+            <Box sx={{ flexGrow: 1, display: 'flex', flexWrap: 'wrap' }}>
+              {navigation.map((page) => (
+                <Button
+                  key={page.name}
+                  onClick={scrollTo.bind(null, page.id)}
+                  variant="text"
+                  sx={{ my: 2, display: 'block', color: 'white', fontFamily: 'Rubik', fontWeight: 'bold' }}
+                >
+                  {page.name}
+                </Button>
+              ))}
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '20px',
+              }}
+            >
+              <IconButton href={Links.socials.discord} sx={IconButtonStyles}>
+                <DiscordIcon width="34px" />
+              </IconButton>
+              <IconButton href={Links.socials.twitter} sx={IconButtonStyles}>
+                <TwitterIcon width="34px" />
+              </IconButton>
+              <IconButton href={Links.socials.telegram} sx={IconButtonStyles}>
+                <TelegramIcon width="34px" />
+              </IconButton>
+            </Box>
+          </Box>
+          <Box>
+            <Typography fontFamily="Rubik" textAlign="center" color="white" fontSize={{ xs: '12px', md: '16px' }}>
+              ©2021 DREPUBLIC, INC. ALL RIGHTS RESERVED.
+            </Typography>
           </Box>
         </Box>
-        <Box>
-          <Typography fontFamily="Rubik" textAlign="center" color="white" fontSize={{ xs: '12px', md: '16px' }}>
-            ©2021 DREPUBLIC, INC. ALL RIGHTS RESERVED.
-          </Typography>
-        </Box>
-      </Box>
+      </InViewContext.Provider>
     </Paper>
   )
 }
