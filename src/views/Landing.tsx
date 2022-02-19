@@ -3,6 +3,7 @@ import { Container, Typography, Button, Box } from '@mui/material'
 import { LandingImg } from 'assets'
 import { ImageContainer } from 'components'
 import useIntersectionObserver, { useInViewContext } from 'helpers'
+import { Links } from 'config'
 
 const Landing = () => {
   const ref = React.useRef<HTMLDivElement | null>(null)
@@ -49,6 +50,7 @@ const Landing = () => {
           >
             <Button
               variant="contained"
+              href={Links.signUp}
               sx={{
                 width: '250px',
                 background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
@@ -70,6 +72,7 @@ const Landing = () => {
         >
           <Button
             variant="contained"
+            href={Links.signUp}
             sx={{
               width: '250px',
               background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
