@@ -1,4 +1,4 @@
-interface Links {
+interface LinksProps {
   signUp: string;
   socials: {
     twitter: string
@@ -6,7 +6,7 @@ interface Links {
     telegram: string
   }
 }
-export const Links: Links = {
+export const Links: LinksProps = {
   signUp: 'https://q8l8vdgawgu.typeform.com/to/YXvwABcm',
   socials: {
     twitter: 'https://twitter.com/',

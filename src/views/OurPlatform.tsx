@@ -3,7 +3,7 @@ import { Container, Typography, Box, Card, Grid, CardContent } from '@mui/materi
 import { Card1Img, Card2Img, Card3Img, Card4Img, MetaverseImg } from 'assets'
 import styled from '@emotion/styled'
 import ImageContainer from 'components/ImageContainer'
-import useIntersectionObserver, { InViewContext, useInViewContext } from 'helpers'
+import useIntersectionObserver, { useInViewContext } from 'helpers'
 
 const Indicator = styled('div')`
   background: #294fe4;
