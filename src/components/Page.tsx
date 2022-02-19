@@ -1,21 +1,16 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
-import ListItem from '@mui/material/ListItem'
 import Drawer from '@mui/material/Drawer'
 import { List, ListItemButton, Paper } from '@mui/material'
-// import Container from '@mui/material/Container'
 import { navigation, Links } from 'config'
-import useIntersectionObserver, { InViewContext } from 'helpers'
+import { InViewContext } from 'helpers'
 import ImageContainer from './ImageContainer'
 import { PunchLogo, PaymentProviders, DiscordIcon, TelegramIcon, TwitterIcon } from 'assets'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
@@ -79,12 +74,6 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
     investors: false,
     contact: false,
   })
-  const pathname = window.location.pathname
-  const isActive = (path: string): boolean => pathname.includes(path) || currentSection[path.replace('#', '')]
-
-  const ref = useRef<HTMLDivElement | null>(null)
-  const entry = useIntersectionObserver(ref, {})
-  const isVisible = !!entry?.isIntersecting
 
   const scrollTo = (id: string) => {
     const section = document.querySelector(id)
@@ -99,7 +88,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
             <Container maxWidth="xl">
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
                 <IconButton color="primary">
-                  <MenuIcon onClick={toggleDrawer('left', true)} />
+                  <MenuIcon onClick={toggleDrawer('left', true)} fontSize="large" />
                 </IconButton>
                 <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
                   Punch
@@ -119,14 +108,6 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                     Punch
                   </Typography>
                 </Box>
-                {/*  <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{ flexGrow: 1, color: 'black', display: { xs: 'none', md: 'flex' } }}
-                >
-                  Punch
-                </Typography> */}
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                   {navigation.map((page) => (
                     <Button
@@ -136,7 +117,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                       sx={{
                         my: 2,
                         display: 'block',
-                        color: isActive(page.id) ? 'text.sceondary' : 'text.primary',
+                        color: currentSection[page.id.replace('#', '')] ? 'text.sceondary' : 'text.primary',
                         fontFamily: 'Rubik',
                         fontWeight: 'bold',
                       }}
@@ -152,8 +133,10 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                     {navigation.map((page) => (
                       <ListItemButton
                         key={page.name}
-                        onClick={scrollTo.bind(null, page.id) && toggleDrawer('left', false)}
-                        selected={isActive(page.id)}
+                        onClick={toggleDrawer('left', false) && scrollTo.bind(null, page.id)}
+                        sx={{
+                        color: currentSection[page.id.replace('#', '')] ? 'text.sceondary' : 'text.primary',
+                        }}
                       >
                         {page.name}
                       </ListItemButton>
@@ -194,7 +177,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
               <ImageContainer
                 url={PaymentProviders}
                 sx={{
-                  maxWidth: { xs: '100%', md: '270px' },
+                  maxWidth: '270px',
                 }}
               />
             </Box>
