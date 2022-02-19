@@ -7,7 +7,7 @@ interface LinksProps {
   }
 }
 export const Links: LinksProps = {
-  signUp: 'https://q8l8vdgawgu.typeform.com/to/YXvwABcm',
+  signUp: 'https://forms.gle/byc8wQTyjWBymW9z8',
   socials: {
     twitter: 'https://twitter.com/',
     discord: 'https://discord.gg/',
