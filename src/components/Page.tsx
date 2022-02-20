@@ -71,7 +71,6 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
     home: true,
     about: false,
     partners: false,
-    investors: false,
     contact: false,
   })
 

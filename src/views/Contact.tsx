@@ -26,12 +26,10 @@ const Contact = () => {
         home: false,
         about: false,
         partners: false,
-        investors: false,
         contact: true,
       })
     }
   }, [isVisible, handleChangeViews])
-  console.log('contact is visible', isVisible)
 
   return (
     <Container

@@ -17,12 +17,10 @@ const Landing = () => {
         home: true,
         about: false,
         partners: false,
-        investors: false,
         contact: false,
       })
     }
   }, [isVisible, handleChangeViews])
-  console.log('home is visible', isVisible)
 
   return (
     <Container id="home" sx={{ height: '100vh', paddingTop: '68px' }} maxWidth="xl" ref={ref}>

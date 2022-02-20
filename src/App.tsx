@@ -5,6 +5,7 @@ import OurPlatform from 'views/OurPlatform'
 import { Page } from './components'
 import { CssBaseline } from '@mui/material'
 import Contact from 'views/Contact'
+import Partners from 'views/Partners'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Page>
         <Landing />
         <OurPlatform />
+        <Partners />
         <Contact />
       </Page>
     </>

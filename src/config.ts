@@ -29,10 +29,6 @@ export const navigation: { name: string; id: string }[] = [
     id: '#partners',
   },
   {
-    name: 'Investors',
-    id: '#investors',
-  },
-  {
     name: 'Contact',
     id: '#contact',
   },

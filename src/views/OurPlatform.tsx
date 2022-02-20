@@ -17,7 +17,6 @@ const OurPlatform = () => {
   const ref = React.useRef<HTMLDivElement | null>(null)
   const entry = useIntersectionObserver(ref, {})
   const isVisible = !!entry?.isIntersecting
-  console.log('about is visible', isVisible)
 
   const { handleChangeViews } = useInViewContext()
   React.useEffect(() => {
@@ -26,7 +25,6 @@ const OurPlatform = () => {
         home: false,
         about: true,
         partners: false,
-        investors: false,
         contact: false,
       })
     }

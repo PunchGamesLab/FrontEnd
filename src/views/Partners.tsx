@@ -1,28 +1,63 @@
 import React from 'react'
-import { Container, Typography, Button, Card } from '@mui/material'
+import { Container, Typography, Grid } from '@mui/material'
+import { ImageContainer } from 'components'
+import { PartnersLudena } from 'assets'
+import useIntersectionObserver, { useInViewContext } from 'helpers'
 
 const Partners = () => {
+  const ref = React.useRef<HTMLDivElement | null>(null)
+  const entry = useIntersectionObserver(ref, {})
+  const isVisible = !!entry?.isIntersecting
+
+  const { handleChangeViews } = useInViewContext()
+  React.useEffect(() => {
+    if (isVisible) {
+      handleChangeViews({
+        home: false,
+        about: false,
+        partners: true,
+        contact: false,
+      })
+    }
+  }, [isVisible, handleChangeViews])
+
   return (
     <>
-      <Container id="partners">
-        <Typography>Our Platform</Typography>
-        <Typography>Will Include</Typography>
-        <Card>All Categories of play to earn games</Card>
-        <Card>Tokens &amp; NFT releases</Card>
-        <Card>Esports tournaments</Card>
-        <Card>Social features like video chatting,live streaming and more</Card>
-        <Typography>In the Punch Metaverse you can</Typography>
-        <Typography>EARN MONEY, MAKE FRIENDS and have A LOT OF FUN!</Typography>
-      </Container>
-      <Container id="investors">
-        <Typography>Our Platform</Typography>
-        <Typography>Will Include</Typography>
-        <Card>All Categories of play to earn games</Card>
-        <Card>Tokens &amp; NFT releases</Card>
-        <Card>Esports tournaments</Card>
-        <Card>Social features like video chatting,live streaming and more</Card>
-        <Typography>In the Punch Metaverse you can</Typography>
-        <Typography>EARN MONEY, MAKE FRIENDS and have A LOT OF FUN!</Typography>
+      <Container
+        id="partners"
+        sx={{
+          paddingBottom: { xs: '60px', md: '160px' },
+        }}
+        ref={ref}
+      >
+        <Typography textAlign="center" fontSize={{ xs: '20px', md: '48px' }}>
+          Partners
+        </Typography>
+        <Typography
+          fontFamily="Rubik"
+          fontWeight="600"
+          textAlign="center"
+          fontSize={{ xs: '12px', md: '24px' }}
+          marginTop="10px"
+        >
+          Get to know our partners
+        </Typography>
+        <Grid container marginTop="40px">
+          <Grid item xs={6} sm={3}>
+            <a href="https://www.ludenaprotocol.io/" target="_blank" rel="noreferrer">
+              <ImageContainer
+                url={PartnersLudena}
+                sx={{
+                  img: {
+                    filter: 'brightness(0)',
+                  },
+
+                  maxWidth: '165px',
+                }}
+              />
+            </a>
+          </Grid>
+        </Grid>
       </Container>
     </>
   )

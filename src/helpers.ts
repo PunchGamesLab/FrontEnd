@@ -46,18 +46,16 @@ interface InViewProps {
     home: boolean,
     about: boolean,
     partners: boolean,
-    investors: boolean,
     contact: boolean,
   };
   handleChangeViews: (view: {
     home: boolean,
     about: boolean,
     partners: boolean,
-    investors: boolean,
     contact: boolean,
   }) => void;
 
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export const InViewContext = createContext<InViewProps>({ views: { home: false, about: false, partners: false, investors: false, contact: false }, handleChangeViews: () => { } })
+export const InViewContext = createContext<InViewProps>({ views: { home: false, about: false, partners: false, contact: false }, handleChangeViews: () => { } })
 export const useInViewContext = () => useContext(InViewContext);
