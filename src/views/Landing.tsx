@@ -23,7 +23,7 @@ const Landing = () => {
   }, [isVisible, handleChangeViews])
 
   return (
-    <Container id="home" sx={{ height: '100vh', paddingTop: '68px' }} maxWidth="xl" ref={ref}>
+    <Container id="home" sx={{ height: '100vh', paddingTop: '68px' }} maxWidth="lg" ref={ref}>
       <Box
         sx={{
           display: 'flex',
@@ -49,6 +49,8 @@ const Landing = () => {
             <Button
               variant="contained"
               href={Links.signUp}
+              target="_blank"
+              rel="noopener noreferrer"
               sx={{
                 width: '250px',
                 background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
@@ -62,7 +64,7 @@ const Landing = () => {
             </Button>
           </Box>
         </Box>
-        <ImageContainer url={LandingImg} sx={{ maxWidth: { xs: '325px', md: '43vw' }, height: 'fit-content' }} />
+        <ImageContainer url={LandingImg} sx={{ maxWidth: { xs: '325px', md: '25vw' }, height: 'fit-content' }} />
         <Box
           sx={{
             display: { xs: 'flex', md: 'none' },
@@ -71,6 +73,8 @@ const Landing = () => {
           <Button
             variant="contained"
             href={Links.signUp}
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               width: '250px',
               background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
