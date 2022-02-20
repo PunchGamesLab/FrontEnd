@@ -198,13 +198,13 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                 gap: '20px',
               }}
             >
-              <IconButton href={Links.socials.discord} sx={IconButtonStyles}>
+              <IconButton href={Links.socials.discord} sx={IconButtonStyles} target="_blank" rel="noreferrer">
                 <DiscordIcon width="34px" />
               </IconButton>
-              <IconButton href={Links.socials.twitter} sx={IconButtonStyles}>
+              <IconButton href={Links.socials.twitter} sx={IconButtonStyles} target="_blank" rel="noreferrer">
                 <TwitterIcon width="34px" />
               </IconButton>
-              <IconButton href={Links.socials.telegram} sx={IconButtonStyles}>
+              <IconButton href={Links.socials.telegram} sx={IconButtonStyles} target="_blank" rel="noreferrer">
                 <TelegramIcon width="34px" />
               </IconButton>
             </Box>

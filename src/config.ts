@@ -9,9 +9,9 @@ interface LinksProps {
 export const Links: LinksProps = {
   signUp: 'https://forms.gle/byc8wQTyjWBymW9z8',
   socials: {
-    twitter: 'https://twitter.com/',
-    discord: 'https://discord.gg/',
-    telegram: 'https://t.me/'
+    twitter: 'https://twitter.com/Punch__Games',
+    discord: 'https://t.co/jXQ5tJC75s',
+    telegram: 'https://t.co/sNr3UGVcpi '
   }
 }
 
