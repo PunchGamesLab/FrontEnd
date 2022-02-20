@@ -79,6 +79,8 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  // get current year
+  const currentYear = new Date().getFullYear()
   return (
     <Paper sx={{ minHeight: '100vh' }}>
       <InViewContext.Provider value={{ views: currentSection, handleChangeViews: setCurrentSection }}>
@@ -134,7 +136,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                         key={page.name}
                         onClick={toggleDrawer('left', false) && scrollTo.bind(null, page.id)}
                         sx={{
-                        color: currentSection[page.id.replace('#', '')] ? 'text.sceondary' : 'text.primary',
+                          color: currentSection[page.id.replace('#', '')] ? 'text.sceondary' : 'text.primary',
                         }}
                       >
                         {page.name}
@@ -211,7 +213,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
           </Box>
           <Box>
             <Typography fontFamily="Rubik" textAlign="center" color="white" fontSize={{ xs: '12px', md: '16px' }}>
-              ©2021 DREPUBLIC, INC. ALL RIGHTS RESERVED.
+              &copy; {currentYear} Punch Games. All rights reserved.
             </Typography>
           </Box>
         </Box>
