@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Typography, Card, CardContent, Box } from '@mui/material'
+import Button from '@mui/material/Button'
 import { Links } from 'config'
 import { DiscordIcon, JoinNowImg, TelegramIcon, TwitterIcon } from 'assets'
 import { ImageContainer } from 'components'
@@ -10,7 +11,7 @@ const IconButtonStyles = {
   background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
   border: '5px solid #E3EDFF',
   borderRadius: '500px',
-  width: '85px',
+  width: { xs: '55px', md: '85px' },
   aspectRatio: '1',
 } as const
 
@@ -38,6 +39,7 @@ const Contact = () => {
         paddingBottom: { xs: '60px', md: '160px' },
       }}
       ref={ref}
+      maxWidth="md"
     >
       <Card
         sx={{
@@ -45,61 +47,78 @@ const Contact = () => {
           borderRadius: '20px',
         }}
       >
-        <CardContent
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            justifyContent: { xs: 'center', md: 'space-between' },
-            alignItems: { xs: 'center', md: 'flex-start' },
-          }}
-        >
+        <CardContent>
           <Box>
+            <Typography textAlign="center" fontSize={{ xs: '20px', md: '48px' }}>
+              Join our communities
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              justifyContent: { xs: 'center', md: 'center' },
+              alignItems: { xs: 'center', md: 'center' },
+              my: 2,
+            }}
+          >
             <Box>
-              <Typography textAlign="center" fontSize={{ xs: '20px', md: '48px' }}>
-                Join our communities
-              </Typography>
-              <Typography
-                fontFamily="Rubik"
-                textAlign={{ xs: 'center', md: 'left' }}
-                fontSize={{ xs: '12px', md: '24px' }}
+              <Box
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  gap: '20px',
+                }}
               >
-                Join Now
-              </Typography>
+                <IconButton href={Links.socials.discord} sx={IconButtonStyles} target="_blank" rel="noreferrer">
+                  <DiscordIcon width="34px" />
+                </IconButton>
+                <IconButton href={Links.socials.twitter} sx={IconButtonStyles} target="_blank" rel="noreferrer">
+                  <TwitterIcon width="34px" />
+                </IconButton>
+                <IconButton href={Links.socials.telegram} sx={IconButtonStyles} target="_blank" rel="noreferrer">
+                  <TelegramIcon width="34px" />
+                </IconButton>
+              </Box>
             </Box>
             <Box
               sx={{
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: 'flex', md: 'none' },
                 gap: '20px',
               }}
             >
-              <IconButton href={Links.socials.discord} sx={IconButtonStyles} target="_blank" rel="noreferrer">
-                <DiscordIcon width="34px" />
+              <IconButton href={Links.socials.discord} sx={IconButtonStyles}>
+                <DiscordIcon width="24px" />
               </IconButton>
-              <IconButton href={Links.socials.twitter} sx={IconButtonStyles} target="_blank" rel="noreferrer">
-                <TwitterIcon width="34px" />
+              <IconButton href={Links.socials.twitter} sx={IconButtonStyles}>
+                <TwitterIcon width="24px" />
               </IconButton>
-              <IconButton href={Links.socials.telegram} sx={IconButtonStyles} target="_blank" rel="noreferrer">
-                <TelegramIcon width="34px" />
+              <IconButton href={Links.socials.telegram} sx={IconButtonStyles}>
+                <TelegramIcon width="24px" />
               </IconButton>
             </Box>
           </Box>
-          <ImageContainer url={JoinNowImg} sx={{ maxWidth: '299px' }} />
-          <Box
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              gap: '20px',
-            }}
-          >
-            <IconButton href={Links.socials.discord} sx={IconButtonStyles}>
-              <DiscordIcon width="34px" />
-            </IconButton>
-            <IconButton href={Links.socials.twitter} sx={IconButtonStyles}>
-              <TwitterIcon width="34px" />
-            </IconButton>
-            <IconButton href={Links.socials.telegram} sx={IconButtonStyles}>
-              <TelegramIcon width="34px" />
-            </IconButton>
+          <Box display="flex" justifyContent="center" my={2}>
+            <Button
+              variant="contained"
+              href={Links.signUp}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                width: { xs: '150px', md: '250px' },
+                background: 'linear-gradient(266.3deg, #5A95FF 10.08%, #2571FA 90.44%)',
+                border: '5px solid #E3EDFF',
+                boxSizing: 'border-box',
+                borderRadius: '500px',
+                fontSize: { xs: '20px', md: '30px' },
+              }}
+            >
+              Sign Up
+            </Button>
           </Box>
+          <ImageContainer
+            url={JoinNowImg}
+            sx={{ maxWidth: { xs: '150px', md: '299px' }, margin: '0 auto', marginTop: 2 }}
+          />
         </CardContent>
       </Card>
     </Container>
