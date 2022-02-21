@@ -30,6 +30,29 @@ const OurPlatform = () => {
     }
   }, [isVisible, handleChangeViews])
 
+  const cardsConfig: { text: string; img: string; id: number }[] = [
+    {
+      id: 1,
+      text: 'Tokens & NFT releases',
+      img: Card1Img,
+    },
+    {
+      id: 2,
+      text: 'Esports tournaments',
+      img: Card2Img,
+    },
+    {
+      id: 3,
+      text: 'Social features like video chatting,live streaming and more',
+      img: Card3Img,
+    },
+    {
+      id: 4,
+      text: 'All Categories of play to earn games',
+      img: Card4Img,
+    },
+  ]
+
   return (
     <Container id="about" sx={{ height: '100%' }} maxWidth="xl" ref={ref}>
       <Box>
@@ -57,90 +80,29 @@ const OurPlatform = () => {
           flexWrap: { xs: 'nowrap', md: 'wrap' },
         }}
       >
-        <Grid item xs={12} sm={3}>
-          <Card
-            variant="outlined"
-            sx={{
-              background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card1Img});
-          `,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'bottom, center',
-              height: '390px',
-              borderRadius: '20px',
-              border: '1px solid #294FE4',
-              display: 'flex',
-              alignItems: 'flex-end',
-            }}
-          >
-            <CardContent>
-              <Typography color="white">All Categories of play to earn games</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <Card
-            variant="outlined"
-            sx={{
-              background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card2Img});
-            `,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'bottom, center',
-              height: '390px',
-              borderRadius: '20px',
-              border: '1px solid #294FE4',
-              display: 'flex',
-              alignItems: 'flex-end',
-            }}
-          >
-            <CardContent>
-              <Typography color="white">Tokens &amp; NFT releases</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <Card
-            variant="outlined"
-            sx={{
-              background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card3Img});
-          `,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'bottom, center',
-              height: '390px',
-              borderRadius: '20px',
-              border: '1px solid #294FE4',
-              display: 'flex',
-              alignItems: 'flex-end',
-            }}
-          >
-            <CardContent>
-              <Typography color="white">Esports tournaments</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <Card
-            variant="outlined"
-            sx={{
-              background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card4Img});
-          `,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'bottom, center',
-              height: '390px',
-              borderRadius: '20px',
-              border: '1px solid #294FE4',
-              display: 'flex',
-              alignItems: 'flex-end',
-            }}
-          >
-            <CardContent>
-              <Typography color="white">Social features like video chatting,live streaming and more</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        {cardsConfig.map((card) => (
+          <Grid item xs={12} sm={3} key={card.id}>
+            <Card
+              variant="outlined"
+              sx={{
+                background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${card.img});
+              `,
+                backgroundSize: '100% 50%, cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'bottom, center',
+                height: '390px',
+                borderRadius: '20px',
+                border: '1px solid #294FE4',
+                display: 'flex',
+                alignItems: 'flex-end',
+              }}
+            >
+              <CardContent>
+                <Typography color="white">{card.text}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
 
       <Box
@@ -152,94 +114,31 @@ const OurPlatform = () => {
           overflow: 'scroll',
         }}
       >
-        <Card
-          variant="outlined"
-          sx={{
-            background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card1Img});
-          `,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'bottom, center',
-            height: '390px',
-            borderRadius: '20px',
-            border: '1px solid #294FE4',
-            display: 'flex',
-            alignItems: 'flex-end',
-            width: '100%',
-            flex: '0 0 100%',
-            maxWidth: '343px',
-          }}
-        >
-          <CardContent>
-            <Typography color="white">All Categories of play to earn games</Typography>
-          </CardContent>
-        </Card>
-        <Card
-          variant="outlined"
-          sx={{
-            background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card2Img});
-            `,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'bottom, center',
-            height: '390px',
-            borderRadius: '20px',
-            border: '1px solid #294FE4',
-            display: 'flex',
-            alignItems: 'flex-end',
-            width: '100%',
-            flex: '0 0 100%',
-            maxWidth: '343px',
-          }}
-        >
-          <CardContent>
-            <Typography color="white">Tokens &amp; NFT releases</Typography>
-          </CardContent>
-        </Card>
-        <Card
-          variant="outlined"
-          sx={{
-            background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card3Img});
-          `,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'bottom, center',
-            height: '390px',
-            borderRadius: '20px',
-            border: '1px solid #294FE4',
-            display: 'flex',
-            alignItems: 'flex-end',
-            width: '100%',
-            flex: '0 0 100%',
-            maxWidth: '343px',
-          }}
-        >
-          <CardContent>
-            <Typography color="white">Esports tournaments</Typography>
-          </CardContent>
-        </Card>
-        <Card
-          variant="outlined"
-          sx={{
-            background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${Card4Img});
-          `,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'bottom, center',
-            height: '390px',
-            borderRadius: '20px',
-            border: '1px solid #294FE4',
-            display: 'flex',
-            alignItems: 'flex-end',
-            width: '100%',
-            flex: '0 0 100%',
-            maxWidth: '343px',
-          }}
-        >
-          <CardContent>
-            <Typography color="white">Social features like video chatting,live streaming and more</Typography>
-          </CardContent>
-        </Card>
+        {cardsConfig.map((card) => (
+          <Card
+            variant="outlined"
+            key={card.id}
+            sx={{
+              background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${card.img});
+              `,
+              backgroundSize: '100% 50%, cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'bottom, center',
+              height: '390px',
+              borderRadius: '20px',
+              border: '1px solid #294FE4',
+              display: 'flex',
+              alignItems: 'flex-end',
+              width: '100%',
+              flex: '0 0 100%',
+              maxWidth: '343px',
+            }}
+          >
+            <CardContent>
+              <Typography color="white">{card.text}</Typography>
+            </CardContent>
+          </Card>
+        ))}
       </Box>
       <Box>
         <Typography textAlign="center" fontSize={{ xs: '20px', md: '48px' }}>
