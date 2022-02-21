@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Typography, Grid } from '@mui/material'
 import { ImageContainer } from 'components'
-import { PartnersLudena } from 'assets'
+import { PartnersList } from 'config'
 import useIntersectionObserver, { useInViewContext } from 'helpers'
 
 const Partners = () => {
@@ -42,21 +42,25 @@ const Partners = () => {
         >
           Get to know our partners
         </Typography>
-        <Grid container marginTop="40px">
-          <Grid item xs={6} sm={3}>
-            <a href="https://www.ludenaprotocol.io/" target="_blank" rel="noreferrer">
-              <ImageContainer
-                url={PartnersLudena}
-                sx={{
-                  img: {
-                    filter: 'brightness(0)',
-                  },
+        <Grid container marginTop="40px" justifyContent="center">
+          {PartnersList.map((partner) => (
+            <Grid item xs={6} sm={3} key={partner.name}>
+              <a href={partner.website} target="_blank" rel="noreferrer">
+                <ImageContainer
+                  url={partner.logo}
+                  sx={{
+                    img: {
+                      filter: 'brightness(0)',
+                    },
 
-                  maxWidth: '165px',
-                }}
-              />
-            </a>
-          </Grid>
+                    maxWidth: '165px',
+                    margin: '0 auto',
+                  }}
+                  alt={partner.name}
+                />
+              </a>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </>

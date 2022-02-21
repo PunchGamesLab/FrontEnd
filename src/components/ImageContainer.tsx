@@ -5,15 +5,16 @@ import { BoxProps } from '@mui/system'
 
 interface Props extends BoxProps {
   url: string
+  alt?: string
 }
 const Img = styled('img')`
   width: 100%;
 `
 
-const ImageContainer: React.FC<Props> = ({ url, ...props }) => {
+const ImageContainer: React.FC<Props> = ({ url, alt = 'image', ...props }) => {
   return (
     <Box {...props}>
-      <Img src={url} alt="" />
+      <Img src={url} alt={alt} />
     </Box>
   )
 }

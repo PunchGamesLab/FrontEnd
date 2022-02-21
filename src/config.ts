@@ -33,3 +33,15 @@ export const navigation: { name: string; id: string }[] = [
     id: '#contact',
   },
 ]
+
+interface PartnerProps {
+  name: string;
+  logo: string;
+  website: string;
+}
+
+export const PartnersList: PartnerProps[] = [{
+  name: 'Ludena Protocol',
+  logo: '/images/partners/Ludena.png',
+  website: 'https://www.ludenaprotocol.io/',
+}]
