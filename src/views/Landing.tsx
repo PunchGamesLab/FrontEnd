@@ -35,7 +35,7 @@ const Landing = () => {
       >
         <Box>
           <Box>
-            <Typography color="text.primary" fontSize={{ xs: '32px', md: '64px' }} fontFamily="Rubik" fontWeight="bold">
+            <Typography color="text.primary" fontSize={{ xs: '32px', md: '50px' }} fontFamily="Rubik" fontWeight="bold">
               Punch Games is a Blockchain-powered Web 3.0 Esports Play-to-earn Gaming Metaverse
             </Typography>
           </Box>
@@ -64,7 +64,7 @@ const Landing = () => {
             </Button>
           </Box>
         </Box>
-        <ImageContainer url={LandingImg} sx={{ maxWidth: { xs: '325px', md: '25vw' }, height: 'fit-content' }} />
+        <ImageContainer url={LandingImg} sx={{ maxWidth: { xs: '325px', md: '37vw' }, height: 'fit-content' }} />
         <Box
           sx={{
             display: { xs: 'flex', md: 'none' },
