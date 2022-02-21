@@ -12,7 +12,7 @@ import { List, ListItemButton, Paper } from '@mui/material'
 import { navigation, Links } from 'config'
 import { InViewContext } from 'helpers'
 import ImageContainer from './ImageContainer'
-import { PunchLogo, PaymentProviders, DiscordIcon, TelegramIcon, TwitterIcon } from 'assets'
+import { PaymentProviders, DiscordIcon, TelegramIcon, TwitterIcon } from 'assets'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Slide from '@mui/material/Slide'
 
@@ -91,25 +91,33 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                 <IconButton color="primary">
                   <MenuIcon onClick={toggleDrawer('left', true)} fontSize="large" />
                 </IconButton>
-                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
+                <Typography variant="h6" noWrap component="div" sx={{ color: 'text.primary' }}>
                   Punch
                 </Typography>
               </Box>
-              <Toolbar disableGutters>
+              <Toolbar
+                disableGutters
+                sx={
+                  {
+                    // justifyContent: 'center',
+                  }
+                }
+              >
                 <Box
                   sx={{
-                    flexGrow: 1,
                     display: { xs: 'none', md: 'flex' },
                     alignItems: 'center',
                     gap: '10px',
+                    flex: 1,
+                    marginRight: 'auto',
                   }}
                 >
-                  <ImageContainer url={PunchLogo} sx={{ width: '45px' }} />
-                  <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1, color: 'black' }}>
+                  <ImageContainer url="/logo.png" sx={{ width: '45px' }} />
+                  <Typography variant="h4" noWrap component="div" sx={{ color: 'text.primary' }}>
                     Punch
                   </Typography>
                 </Box>
-                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <Box sx={{ display: { xs: 'none', md: 'flex' }, flex: 1, justifyContent: 'center' }}>
                   {navigation.map((page) => (
                     <Button
                       key={page.name}
@@ -127,6 +135,8 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                     </Button>
                   ))}
                 </Box>
+                {/* this exits to align the button container to te=he middle, it seems unnecessary but deleting it will cause the buttons to misalign */}
+                <Box sx={{ display: 'flex', flex: 1, marginLeft: 'auto' }} />
               </Toolbar>
               <Drawer variant="temporary" anchor="left" open={state.left} onClose={toggleDrawer('left', false)}>
                 <Box>
@@ -150,6 +160,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
         </HideOnScroll>
         {children}
         <Box
+          component="footer"
           sx={{
             background: '#2672FA',
             p: { xs: '30px', md: '30px 130px' },
@@ -158,18 +169,18 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
             },
           }}
         >
-          <ImageContainer url={PunchLogo} sx={{ width: '51px' }} />
+          <ImageContainer url="/logo.png" sx={{ width: '51px' }} />
           <Box
             sx={{
               display: 'flex',
               flexDirection: { xs: 'column', md: 'row' },
-              justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
             <Box
               sx={{
-                maxWidth: { md: '390px' },
+                flex: 1,
+                marginRight: 'auto',
               }}
             >
               <Typography color="white">
@@ -182,7 +193,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                 }}
               />
             </Box>
-            <Box sx={{ flexGrow: 1, display: 'flex', flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', flex: 1, justifyContent: 'center' }}>
               {navigation.map((page) => (
                 <Button
                   key={page.name}
@@ -198,6 +209,9 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
               sx={{
                 display: 'flex',
                 gap: '20px',
+                flex: 1,
+                marginLeft: 'auto',
+                justifyContent: 'flex-end',
               }}
             >
               <IconButton href={Links.socials.discord} sx={IconButtonStyles} target="_blank" rel="noreferrer">
