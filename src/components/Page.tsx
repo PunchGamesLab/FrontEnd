@@ -169,7 +169,7 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
             },
           }}
         >
-          <ImageContainer url="/logo.png" sx={{ width: '51px' }} />
+          <ImageContainer url="/logo.png" sx={{ width: '51px', margin: { xs: '0 auto', md: 'unset' } }} />
           <Box
             sx={{
               display: 'flex',
@@ -183,17 +183,30 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                 marginRight: 'auto',
               }}
             >
-              <Typography color="white">
+              <Typography
+                color="white"
+                textAlign={{ xs: 'center', md: 'left' }}
+                fontFamily="Rubik"
+                fontSize={{ xs: '12px', md: '1rem' }}
+              >
                 Punch Games is a Blockchain-powered Web 3.0 Esports Play-to-earn Gaming Metaverse
               </Typography>
               <ImageContainer
                 url={PaymentProviders}
                 sx={{
                   maxWidth: '270px',
+                  margin: { xs: '0 auto', md: 'unset' },
                 }}
               />
             </Box>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', flex: 1, justifyContent: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                flex: 1,
+                justifyContent: 'center',
+              }}
+            >
               {navigation.map((page) => (
                 <Button
                   key={page.name}
@@ -210,8 +223,9 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                 display: 'flex',
                 gap: '20px',
                 flex: 1,
-                marginLeft: 'auto',
-                justifyContent: 'flex-end',
+                marginLeft: { xs: 'auto', md: 'auto' },
+                marginRight: { xs: 'auto', md: '0' },
+                marginBottom: { xs: 2, md: 0 },
               }}
             >
               <IconButton href={Links.socials.discord} sx={IconButtonStyles} target="_blank" rel="noreferrer">
