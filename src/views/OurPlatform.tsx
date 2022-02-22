@@ -4,6 +4,7 @@ import { Card1Img, Card2Img, Card3Img, Card4Img, MetaverseImg } from 'assets'
 import styled from '@emotion/styled'
 import ImageContainer from 'components/ImageContainer'
 import useIntersectionObserver, { useInViewContext } from 'helpers'
+import Carousel from 'react-material-ui-carousel'
 
 const Indicator = styled('div')`
   background: #294fe4;
@@ -109,36 +110,51 @@ const OurPlatform = () => {
         padding="60px 0 10px"
         marginBottom={{ xs: '80px', md: '160px' }}
         sx={{
-          display: { xs: 'flex', md: 'none' },
-          gap: 2,
-          overflow: 'scroll',
+          display: { xs: 'box', md: 'none' },
         }}
       >
-        {cardsConfig.map((card) => (
-          <Card
-            variant="outlined"
-            key={card.id}
-            sx={{
-              background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${card.img});
+        <Carousel
+          animation="slide"
+          indicatorIconButtonProps={{
+            style: {
+              background: '#E3EDFF',
+              color: '#E3EDFF',
+              margin: '0 5px',
+            },
+          }}
+          activeIndicatorIconButtonProps={{
+            style: {
+              background: '#294FE4',
+              color: '#294FE4',
+            },
+          }}
+        >
+          {cardsConfig.map((card) => (
+            <Card
+              variant="outlined"
+              key={card.id}
+              sx={{
+                background: `linear-gradient(360deg, rgba(38, 114, 250, 0.67) 29.13%, rgba(196, 196, 196, 0) 91.93%), url(${card.img});
               `,
-              backgroundSize: '100% 50%, cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'bottom, center',
-              height: '390px',
-              borderRadius: '20px',
-              border: '1px solid #294FE4',
-              display: 'flex',
-              alignItems: 'flex-end',
-              width: '100%',
-              flex: '0 0 100%',
-              maxWidth: '343px',
-            }}
-          >
-            <CardContent>
-              <Typography color="white">{card.text}</Typography>
-            </CardContent>
-          </Card>
-        ))}
+                backgroundSize: '100% 50%, cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'bottom, center',
+                height: '390px',
+                borderRadius: '20px',
+                border: '1px solid #294FE4',
+                display: 'flex',
+                alignItems: 'flex-end',
+                width: '100%',
+                flex: '0 0 100%',
+                maxWidth: '343px',
+              }}
+            >
+              <CardContent>
+                <Typography color="white">{card.text}</Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Carousel>
       </Box>
       <Box>
         <Typography textAlign="center" fontSize={{ xs: '20px', md: '48px' }}>
