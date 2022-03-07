@@ -40,8 +40,15 @@ interface PartnerProps {
   website: string;
 }
 
-export const PartnersList: PartnerProps[] = [{
-  name: 'Ludena Protocol',
-  logo: '/images/partners/Ludena.png',
-  website: 'https://www.ludenaprotocol.io/',
-}]
+export const PartnersList: PartnerProps[] = [
+  {
+    name: 'Ludena Protocol',
+    logo: '/images/partners/Ludena.png',
+    website: 'https://www.ludenaprotocol.io/',
+  },
+  {
+    name: 'Yield Guild Games SEA',
+    logo: '/images/partners/ygg.png',
+    website: 'https://twitter.com/yggsea?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',
+  },
+]

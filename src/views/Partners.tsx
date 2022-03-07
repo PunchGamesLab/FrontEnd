@@ -42,7 +42,7 @@ const Partners = () => {
         >
           Get to know our partners
         </Typography>
-        <Grid container marginTop="40px" justifyContent="center">
+        <Grid container marginTop="40px" justifyContent="center" alignItems="center">
           {PartnersList.map((partner) => (
             <Grid item xs={6} sm={3} key={partner.name}>
               <a href={partner.website} target="_blank" rel="noreferrer">
