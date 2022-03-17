@@ -15,6 +15,7 @@ import ImageContainer from './ImageContainer'
 import { PaymentProviders, DiscordIcon, TelegramIcon, TwitterIcon } from 'assets'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Slide from '@mui/material/Slide'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface Props {
   children: React.ReactNode
@@ -134,6 +135,8 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                     <Button
                       key={page.name}
                       onClick={scrollTo.bind(null, page.id)}
+                      component={RouterLink}
+                      to={`/${page.id}`}
                       variant="text"
                       sx={{
                         my: 2,
