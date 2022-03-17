@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
-import { List, ListItemButton, Paper } from '@mui/material'
+import { List, ListItemButton, Paper, Link } from '@mui/material'
 import { navigation, Links } from 'config'
 import { InViewContext } from 'helpers'
 import ImageContainer from './ImageContainer'
@@ -88,12 +88,18 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
           <AppBar sx={{ background: '#FFFFFF', height: '68px' }} elevation={0}>
             <Container maxWidth="xl">
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
-                <IconButton color="primary">
-                  <MenuIcon onClick={toggleDrawer('left', true)} fontSize="large" />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div" sx={{ color: 'text.primary' }}>
-                  Punch
-                </Typography>
+                <Link
+                  href="/"
+                  color="text.primary"
+                  sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                >
+                  <IconButton color="primary">
+                    <MenuIcon onClick={toggleDrawer('left', true)} fontSize="large" />
+                  </IconButton>
+                  <Typography variant="h6" noWrap component="div" sx={{ color: 'text.primary' }}>
+                    Punch
+                  </Typography>
+                </Link>
               </Box>
               <Toolbar
                 disableGutters
@@ -112,10 +118,16 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
                     marginRight: 'auto',
                   }}
                 >
-                  <ImageContainer url="/logo.png" sx={{ width: '45px' }} />
-                  <Typography variant="h4" noWrap component="div" sx={{ color: 'text.primary' }}>
-                    Punch
-                  </Typography>
+                  <Link
+                    href="/"
+                    color="text.primary"
+                    sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                  >
+                    <ImageContainer url="/logo.png" sx={{ width: '45px' }} />
+                    <Typography variant="h4" noWrap component="div" sx={{ color: 'text.primary' }}>
+                      Punch
+                    </Typography>
+                  </Link>
                 </Box>
                 <Box sx={{ display: { xs: 'none', md: 'flex' }, flex: 1, justifyContent: 'center' }}>
                   {navigation.map((page) => (
@@ -242,6 +254,11 @@ const ResponsiveAppBar: React.FC<Props> = ({ children, ...props }) => {
           <Box>
             <Typography fontFamily="Rubik" textAlign="center" color="white" fontSize={{ xs: '12px', md: '16px' }}>
               &copy; {currentYear} Punch Games. All rights reserved.
+            </Typography>
+            <Typography color="white">
+              <Link href="/tos" color="inherit" fontSize="14px" marginRight="30px">
+                Terms &amp; Conditions of Service
+              </Link>
             </Typography>
           </Box>
         </Box>
